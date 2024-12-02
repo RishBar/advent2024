@@ -16,11 +16,7 @@ const findSafeReports = (reports: number[][]): number => {
 
         const isLevelAscending = (report[1] - report[0] > 0) ? true : false;
 
-        for (let index = 0; index < report.length; index++) {
-            if (index === 0) {
-                continue;
-            }
-
+        for (let index = 1; index < report.length; index++) {
             const levelSpike = report[index] - report[index - 1];
             const absoluteLevelSpike = Math.abs(levelSpike);
 
