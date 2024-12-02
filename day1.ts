@@ -70,7 +70,7 @@ console.log(getSumOfDifference(sortIds(formatInput(
 const getSimilarityScore = (locationIds: LocationIds): number => {
     let similarityScore = 0;
     locationIds.leftIds.forEach((leftLocationId) => {
-        const occurences = locationIds.rightIds.filter(rightLocationId => rightLocationId == leftLocationId).length
+        const occurences = locationIds.rightIds.filter(rightLocationId => rightLocationId === leftLocationId).length
         similarityScore += occurences * Number(leftLocationId)
     })
 
