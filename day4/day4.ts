@@ -97,7 +97,7 @@ const searchXmasDiagonal = (
 }
 
 
-const findXMAS = (wordSearch: string[][]) => {
+const findXMAS = (wordSearch: string[][]): number => {
     let XmasCounter = 0;
 
     wordSearch.forEach((row, rowNumber) => {
@@ -116,3 +116,43 @@ const findXMAS = (wordSearch: string[][]) => {
 const formattedDay4Input = day4Input.split('\n').map(line => line.split(''))
 
 console.log(findXMAS(formattedDay4Input))
+
+
+// PART 2
+
+const reverseString = (str: string): string => {
+    return str.split('').reverse().join('')
+}
+
+const searchDiagonalMas = (
+    wordSearch: string[][], 
+    { row, column }: { row: number; column: number }
+): number => {
+    let xMasOccurences = 0;
+    const leftDownLetters = findCharacter(wordSearch, { row: row - 1, column: column - 1 }) + 'A' + findCharacter(wordSearch, { row: row + 1, column: column + 1 })
+    const leftUpLetters = findCharacter(wordSearch, { row: row + 1, column: column - 1 }) + 'A' + findCharacter(wordSearch, { row: row - 1, column: column + 1 })
+
+    if (leftDownLetters === 'MAS' || reverseString(leftDownLetters) === 'MAS') {
+        if (leftUpLetters === 'MAS' || reverseString(leftUpLetters) === 'MAS') {
+            xMasOccurences++;
+        }
+    }
+
+    return xMasOccurences;
+}
+
+const findCrossingMAS = (wordSearch: string[][]): number => {
+    let crossingMasCounter = 0;
+
+    wordSearch.forEach((row, rowNumber) => {
+        row.forEach((character, columnNumber) => {
+            if (character === 'A') {
+                crossingMasCounter += searchDiagonalMas(wordSearch, { row: rowNumber, column: columnNumber })
+            }
+        })
+    })
+
+    return crossingMasCounter
+}
+
+console.log(findCrossingMAS(formattedDay4Input))
