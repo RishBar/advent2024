@@ -100,8 +100,8 @@ const exampleData = `47|53
 61,13,29
 97,13,75,29,47`;
 
-// mainPartOne(exampleData);
-// mainPartOne(rawDay5Input);
+mainPartOne(exampleData);
+mainPartOne(rawDay5Input);
 
 // PART 2
 
